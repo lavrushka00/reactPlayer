@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.scss";
+import Header from "./components/header/header";
+import PlayList from "./components/playlist/PlayList";
+import React, { useState, useEffect, useRef } from "react";
 
-function App() {
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  
+  
+  return {
+    musicList: state.musicReducer
+  };
+};
+
+
+
+
+function App(props) {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wrapper">
+        <Header />
+
+        <button>{"<<<<"}</button>
+        <button>{">>>>"}</button>
+
+
+        <div className="main">
+          <PlayList
+            musicList = {props.musicList}
+            
+          />
+          <hr />
+          <div className="nextPlaylist"></div>
+          <hr />
+          <div className="chat"></div>
+
+
+
+        </div>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
